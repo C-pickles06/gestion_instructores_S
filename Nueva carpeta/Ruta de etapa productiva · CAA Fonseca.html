@@ -1,0 +1,825 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Ruta de etapa productiva · SENA CAA</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#F1F4F5; --surf:#FFFFFF; --surf2:#F7F9FA; --ink:#17303F; --mut:#5A6B76; --line:#D9E1E5;
+  --blue:#00304D; --green:#39A900; --green-ink:#2C8200;
+  --red:#C62828; --red-bg:#FDECEC; --amber:#B7791F; --amber-bg:#FFF4DE; --ok-bg:#EAF6E2;
+  --r:10px;
+  box-sizing:border-box; padding-top:env(safe-area-inset-top,0px); padding-bottom:env(safe-area-inset-bottom,0px);
+}
+@media (prefers-color-scheme:dark){ :root:not([data-theme="light"]){
+  --bg:#0D1A21; --surf:#13242D; --surf2:#182C37; --ink:#E4ECF0; --mut:#93A6B1; --line:#284250;
+  --blue:#8CC4E8; --green:#6CCB3B; --green-ink:#7FDB4D;
+  --red:#F07070; --red-bg:#3A1C1F; --amber:#E8B04F; --amber-bg:#3A2E16; --ok-bg:#1D3320; } }
+:root[data-theme="dark"]{
+  --bg:#0D1A21; --surf:#13242D; --surf2:#182C37; --ink:#E4ECF0; --mut:#93A6B1; --line:#284250;
+  --blue:#8CC4E8; --green:#6CCB3B; --green-ink:#7FDB4D;
+  --red:#F07070; --red-bg:#3A1C1F; --amber:#E8B04F; --amber-bg:#3A2E16; --ok-bg:#1D3320; }
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*,*::before,*::after{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.5 "Work Sans",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;font-variant-numeric:tabular-nums}
+button,input,select,textarea{font:inherit;color:inherit}
+:focus-visible{outline:2px solid var(--green);outline-offset:2px}
+h1,h2,h3,h4{margin:0;line-height:1.25}
+.pad{padding:3rem}
+
+/* barra superior */
+.top{display:flex;flex-wrap:wrap;gap:1rem 2rem;align-items:center;justify-content:space-between;padding:1rem clamp(1rem,3vw,2rem);background:var(--surf);border-bottom:1px solid var(--line)}
+.brand{display:flex;gap:.75rem;align-items:center}
+.brand h1{font-size:1.15rem;font-weight:700;color:var(--blue);letter-spacing:-.01em}
+.brand small{color:var(--mut);font-size:.82rem}
+.mark{width:34px;height:34px;border-radius:50%;background:conic-gradient(var(--green) 0 72%, var(--line) 72% 100%);position:relative;flex:none}
+.mark::after{content:"";position:absolute;inset:7px;border-radius:50%;background:var(--surf)}
+.who-ctl{display:flex;gap:.75rem;flex-wrap:wrap}
+.who-ctl label{display:flex;flex-direction:column;font-size:.75rem;color:var(--mut);gap:.15rem}
+select,input,textarea{background:var(--surf2);border:1px solid var(--line);border-radius:8px;padding:.45rem .6rem;max-width:100%}
+.who-ctl select{min-width:13rem;font-weight:600;color:var(--ink)}
+.date-ctl{display:grid;grid-template-columns:auto auto;gap:0 .75rem;align-items:center;font-size:.78rem;color:var(--mut)}
+.date-ctl b{font-size:1rem;color:var(--ink)}
+.date-ctl div{grid-column:1/-1;display:flex;gap:.35rem;margin-top:.25rem}
+.date-ctl button{border:1px solid var(--line);background:var(--surf2);border-radius:6px;padding:.15rem .5rem;cursor:pointer;font-size:.78rem}
+.date-ctl button:hover{border-color:var(--green)}
+
+/* pestañas */
+.tabs{display:flex;gap:.25rem;padding:0 clamp(1rem,3vw,2rem);background:var(--surf);border-bottom:1px solid var(--line);overflow-x:auto}
+.tabs button{border:0;background:none;padding:.8rem .9rem;cursor:pointer;color:var(--mut);font-weight:500;border-bottom:3px solid transparent;white-space:nowrap;display:flex;gap:.4rem;align-items:center}
+.tabs button[aria-selected="true"]{color:var(--blue);border-bottom-color:var(--green);font-weight:600}
+.badge{background:var(--red);color:#fff;border-radius:99px;font-size:.7rem;padding:0 .4rem;font-weight:700}
+.cnt{background:var(--surf2);border:1px solid var(--line);border-radius:99px;font-size:.7rem;padding:0 .4rem}
+
+.main{padding:1.5rem clamp(1rem,3vw,2rem) 2rem;max-width:1280px;margin:0 auto}
+.main.v-pend{display:grid;grid-template-columns:minmax(0,1fr) 360px;gap:2rem;align-items:start}
+@media (max-width:980px){.main.v-pend{grid-template-columns:1fr}}
+h2{font-size:1rem;font-weight:600;color:var(--blue);margin-bottom:.75rem;display:flex;gap:.5rem;align-items:center}
+h2 .n{font-size:.8rem;color:var(--mut);font-weight:500}
+.mt{margin-top:1.75rem}
+.empty{color:var(--mut);margin:.25rem 0}
+.empty.sm{font-size:.85rem}
+.empty.big{text-align:center;padding:4rem 1rem;max-width:34rem;margin:0 auto}
+.empty.big h2{justify-content:center;font-size:1.3rem}
+.lead{color:var(--mut);max-width:62ch;margin:0 0 1.5rem}
+.hint{font-size:.8rem;color:var(--mut)}
+
+/* filas de aprendiz */
+.list{display:flex;flex-direction:column;gap:.5rem}
+.row{display:grid;grid-template-columns:minmax(12rem,1.3fr) minmax(9rem,1fr) minmax(10rem,1fr) auto;gap:.5rem 1.25rem;align-items:center;text-align:left;background:var(--surf);border:1px solid var(--line);border-radius:var(--r);padding:.8rem 1rem;cursor:pointer;width:100%}
+.row:hover{border-color:var(--blue)}
+.row .next{grid-column:1/-1;font-size:.82rem;color:var(--green-ink);font-weight:600}
+.row .next::before{content:"Tu siguiente paso: ";color:var(--mut);font-weight:400}
+.who b,.where b{display:block;font-weight:600}
+.who small,.where small{display:block;color:var(--mut);font-size:.8rem;line-height:1.3}
+@media (max-width:760px){.row{grid-template-columns:1fr}}
+
+/* la ruta: elemento protagonista */
+.track{list-style:none;margin:0;padding:0;display:flex;align-items:center}
+.track li{flex:1;display:flex;align-items:center;position:relative;min-width:0}
+.track li::before{content:"";position:absolute;left:0;right:50%;top:50%;height:2px;background:var(--line);transform:translateY(-50%)}
+.track li::after{content:"";position:absolute;left:50%;right:0;top:50%;height:2px;background:var(--line);transform:translateY(-50%)}
+.track li:first-child::before,.track li:last-child::after{display:none}
+.track li.done::before,.track li.done::after,.track li.cur::before{background:var(--green)}
+.track .dot{width:9px;height:9px;border-radius:50%;background:var(--surf);border:2px solid var(--line);margin:0 auto;position:relative;z-index:1}
+.track li.done .dot{background:var(--green);border-color:var(--green)}
+.track li.cur .dot{width:15px;height:15px;border-width:3px;background:var(--surf)}
+.track li.cur.green .dot{border-color:var(--green)}
+.track li.cur.amber .dot{border-color:var(--amber);background:var(--amber-bg)}
+.track li.cur.red .dot{border-color:var(--red);background:var(--red-bg)}
+.track li.cur.none .dot{border-color:var(--blue)}
+.track li.cur.fin .dot{border-color:var(--green);background:var(--green)}
+.track li.cur.detour .dot{border-style:dashed}
+.track.big{overflow-x:auto;padding:1.25rem 0 .5rem;margin:0 -.25rem}
+.track.big li{flex-direction:column;min-width:4.4rem}
+.track.big li::before,.track.big li::after{top:calc(1.25rem - 0px)}
+.track.big .dot{width:13px;height:13px;margin-top:calc(1.25rem - 6.5px)}
+.track.big li.cur .dot{width:22px;height:22px;margin-top:calc(1.25rem - 11px)}
+.track.big li{padding-top:0}
+.track.big li::before,.track.big li::after{top:1.25rem}
+.track.big .lbl{font-size:.7rem;color:var(--mut);margin-top:.4rem;text-align:center;line-height:1.2}
+.track.big li.cur .lbl{color:var(--ink);font-weight:700}
+
+/* semáforo */
+.sem{font-size:.78rem;font-weight:600;padding:.2rem .55rem;border-radius:99px;white-space:nowrap;justify-self:start}
+.sem.green{background:var(--ok-bg);color:var(--green-ink)}
+.sem.amber{background:var(--amber-bg);color:var(--amber)}
+.sem.red{background:var(--red-bg);color:var(--red)}
+.sem.none{background:var(--surf2);color:var(--mut);border:1px solid var(--line)}
+.sem.fin{background:var(--green);color:#fff}
+
+.chip{display:inline-flex;align-items:center;gap:.35rem;font-size:.75rem;font-weight:600;padding:.1rem .5rem .1rem .4rem;border-radius:6px;background:color-mix(in srgb,var(--rc) 12%,transparent);color:color-mix(in srgb,var(--rc) 75%,var(--ink));white-space:nowrap;margin:.1rem .25rem .1rem 0}
+.chip::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--rc)}
+
+/* alertas */
+.alerts{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:.4rem}
+.alerts li{border-left:3px solid;padding:.5rem .75rem;border-radius:0 8px 8px 0;font-size:.85rem;display:flex;flex-direction:column}
+.alerts li.red{border-color:var(--red);background:var(--red-bg)}
+.alerts li.amber{border-color:var(--amber);background:var(--amber-bg)}
+.alerts.in{margin:.75rem 0}
+.lnk{border:0;background:none;padding:0;color:var(--blue);font-weight:600;cursor:pointer;text-align:left}
+.lnk:hover{text-decoration:underline}
+.mini{list-style:none;padding:0;margin:0}
+.mini li{display:flex;flex-direction:column;padding:.45rem 0;border-bottom:1px solid var(--line);font-size:.85rem}
+.mini li span{color:var(--mut)}
+
+.filters{display:flex;gap:.5rem;margin-bottom:1rem;flex-wrap:wrap}
+.filters input{flex:1;min-width:14rem}
+
+/* tablero */
+.kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--line);border:1px solid var(--line);border-radius:var(--r);overflow:hidden;margin-bottom:1.5rem}
+.kpis div{background:var(--surf);padding:.9rem 1rem;display:flex;align-items:baseline;gap:.5rem}
+.kpis b{font-size:1.6rem;font-weight:700}
+.kpis span{color:var(--mut);font-size:.85rem}
+.kpis .red b{color:var(--red)} .kpis .amber b{color:var(--amber)} .kpis .ok b{color:var(--green-ink)}
+@media (max-width:760px){.kpis{grid-template-columns:1fr 1fr}}
+.board{display:grid;grid-template-columns:1.2fr 1fr;gap:2rem}
+@media (max-width:900px){.board{grid-template-columns:1fr}}
+.board section{background:var(--surf);border:1px solid var(--line);border-radius:var(--r);padding:1.1rem 1.25rem}
+.bars{list-style:none;margin:0;padding:0}
+.bars li{display:grid;grid-template-columns:7.5rem 1fr 2rem;gap:.75rem;align-items:center;padding:.3rem 0;font-size:.85rem}
+.bar{height:12px;background:var(--surf2);border-radius:3px;position:relative;overflow:hidden}
+.bar i{position:absolute;left:0;top:0;bottom:0;background:var(--blue);border-radius:3px}
+.bar i.r{background:var(--red)}
+.bars b{text-align:right}
+.tb{width:100%;border-collapse:collapse;font-size:.85rem}
+.tb th{text-align:left;color:var(--mut);font-weight:500;border-bottom:1px solid var(--line);padding:.4rem .25rem}
+.tb td{padding:.45rem .25rem;border-bottom:1px solid var(--line)}
+.tred{color:var(--red);font-weight:700}
+.tam{color:var(--amber);font-weight:600}
+.ok{color:var(--green-ink)}
+
+/* ruta */
+.ruta{display:grid;grid-template-columns:1.4fr 1fr;gap:2rem}
+@media (max-width:900px){.ruta{grid-template-columns:1fr}}
+.steps{margin:0;padding:0;list-style:none;counter-reset:s}
+.steps li{position:relative;padding:0 0 1.25rem 2.6rem;counter-increment:s}
+ol.steps li::before{content:counter(s);position:absolute;left:0;top:0;width:1.8rem;height:1.8rem;border-radius:50%;background:var(--blue);color:var(--surf);display:grid;place-items:center;font-size:.8rem;font-weight:700}
+ol.steps li::after{content:"";position:absolute;left:.88rem;top:1.9rem;bottom:.2rem;width:2px;background:var(--line)}
+ol.steps li:last-child::after{display:none}
+.steps.det li{padding-left:0;border-left:3px dashed var(--line);padding-left:1rem}
+.rh{display:flex;justify-content:space-between;gap:1rem;align-items:baseline;flex-wrap:wrap}
+.rh h3{font-size:.98rem}
+.pz{font-size:.78rem;font-weight:600;color:var(--blue);background:var(--surf2);border:1px solid var(--line);padding:.05rem .45rem;border-radius:6px;white-space:nowrap}
+.rr{margin:.35rem 0}
+.docx{font-size:.75rem;color:var(--mut);border:1px dashed var(--line);padding:.05rem .4rem;border-radius:6px}
+.steps p{margin:.2rem 0 0;color:var(--mut);font-size:.87rem;max-width:68ch}
+
+/* notificaciones */
+.notifs{list-style:none;margin:0;padding:0;max-width:52rem}
+.notifs li{display:grid;grid-template-columns:7rem 1fr;gap:1rem;padding:.75rem .5rem;border-bottom:1px solid var(--line)}
+.notifs li.new{background:color-mix(in srgb,var(--green) 7%,transparent)}
+.notifs li.new time::after{content:"";display:inline-block;width:7px;height:7px;border-radius:50%;background:var(--green);margin-left:.4rem;vertical-align:middle}
+.notifs time{font-size:.8rem;color:var(--mut)}
+.notifs p{margin:.1rem 0 0;font-size:.9rem}
+
+/* panel lateral */
+.scrim{position:fixed;inset:0;background:rgba(0,20,30,.35);z-index:10}
+.drawer{position:fixed;top:0;right:0;bottom:0;width:min(760px,100%);background:var(--bg);z-index:11;overflow-y:auto;padding:calc(1.25rem + env(safe-area-inset-top,0px)) 1.5rem calc(2rem + env(safe-area-inset-bottom,0px));box-shadow:-12px 0 40px rgba(0,0,0,.18);animation:sl .22s ease-out}
+@keyframes sl{from{transform:translateX(24px);opacity:.6}to{transform:none;opacity:1}}
+@media (prefers-reduced-motion:reduce){.drawer{animation:none}}
+.drawer header{display:flex;justify-content:space-between;gap:1rem}
+.drawer header h2{font-size:1.35rem;color:var(--ink);margin:0}
+.drawer header p{margin:.25rem 0 0;color:var(--mut);font-size:.85rem}
+.x{border:1px solid var(--line);background:var(--surf);border-radius:8px;width:2.2rem;height:2.2rem;font-size:1.3rem;cursor:pointer;flex:none}
+.now{background:var(--surf);border:1px solid var(--line);border-left:4px solid var(--green);border-radius:var(--r);padding:1rem 1.15rem;margin:.75rem 0 1rem}
+.nh{display:flex;justify-content:space-between;gap:.75rem;align-items:center;flex-wrap:wrap}
+.nh h3{font-size:1.1rem}
+.nh em{font-style:normal;font-size:.72rem;font-weight:600;color:var(--amber);border:1px dashed var(--amber);border-radius:6px;padding:0 .35rem;margin-left:.35rem;vertical-align:middle}
+.resp{margin:.6rem 0 0;font-size:.88rem;display:flex;flex-wrap:wrap;align-items:center;gap:.25rem}
+.resp .pz{margin-left:.35rem}
+.regla{font-size:.86rem;color:var(--mut);margin:.5rem 0 0;max-width:70ch}
+.acts{display:flex;flex-direction:column;align-items:flex-start;gap:.3rem;margin-top:1rem}
+.btn{border:0;background:var(--green);color:#fff;font-weight:600;padding:.55rem 1rem;border-radius:8px;cursor:pointer;margin-top:.2rem}
+.btn:hover{filter:brightness(1.07)}
+.btn.ghost{background:var(--surf);color:var(--blue);border:1px solid var(--line)}
+.btn.danger{background:var(--surf);color:var(--red);border:1px solid var(--red)}
+.btn:disabled{background:var(--surf2);color:var(--mut);border:1px solid var(--line);cursor:not-allowed;filter:none}
+.why{font-size:.76rem;color:var(--mut)}
+.wait{font-size:.88rem;color:var(--mut);margin:0;padding:.6rem .75rem;background:var(--surf2);border-radius:8px}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+.grid section{background:var(--surf);border:1px solid var(--line);border-radius:var(--r);padding:1rem 1.1rem}
+.grid .wide{grid-column:1/-1}
+@media (max-width:640px){.grid{grid-template-columns:1fr}}
+h4{font-size:.85rem;font-weight:600;color:var(--blue);margin-bottom:.5rem}
+h4:not(:first-child){margin-top:1rem}
+dl{margin:0;display:grid;grid-template-columns:auto 1fr;gap:.3rem .75rem;font-size:.85rem}
+dt{color:var(--mut)} dd{margin:0;font-weight:500}
+.checks{list-style:none;margin:0;padding:0;font-size:.85rem}
+.checks li{display:flex;gap:.5rem;align-items:center;padding:.15rem 0;color:var(--mut)}
+.checks li.ok{color:var(--ink)}
+.cb{width:15px;height:15px;border:2px solid var(--line);border-radius:4px;flex:none;position:relative}
+.checks li.ok .cb{background:var(--green);border-color:var(--green)}
+.checks li.ok .cb::after{content:"";position:absolute;left:3px;top:0;width:4px;height:8px;border:solid #fff;border-width:0 2px 2px 0;transform:rotate(45deg)}
+.bits{list-style:none;margin:0;padding:0;font-size:.82rem}
+.bits li{display:grid;grid-template-columns:1.5rem 1fr;gap:0 .5rem;padding:.3rem 0;border-bottom:1px solid var(--line)}
+.bits li b{grid-row:span 2;color:var(--blue)}
+.hist{list-style:none;margin:0;padding:0;font-size:.85rem}
+.hist li{display:grid;grid-template-columns:6.5rem auto 1fr;gap:.5rem;align-items:baseline;padding:.35rem 0;border-bottom:1px solid var(--line)}
+.hist time{color:var(--mut);font-size:.78rem}
+@media (max-width:640px){.hist li{grid-template-columns:1fr}}
+
+.foot{display:flex;justify-content:space-between;gap:1rem;flex-wrap:wrap;padding:1rem clamp(1rem,3vw,2rem) 2rem;color:var(--mut);font-size:.8rem;max-width:1280px;margin:0 auto}
+
+dialog{border:1px solid var(--line);border-radius:12px;background:var(--surf);color:var(--ink);padding:0;width:min(460px,92vw)}
+dialog::backdrop{background:rgba(0,20,30,.45)}
+.dlgf{padding:1.25rem;display:flex;flex-direction:column;gap:.35rem}
+.dlgf h3{margin-bottom:.5rem;color:var(--blue)}
+.dlgf label{font-size:.8rem;color:var(--mut);margin-top:.4rem}
+.dlgb{display:flex;justify-content:flex-end;gap:.5rem;margin-top:1rem}
+#toast{position:fixed;left:50%;bottom:calc(1.25rem + env(safe-area-inset-bottom,0px));transform:translate(-50%,20px);background:var(--blue);color:var(--surf);padding:.6rem 1rem;border-radius:8px;font-size:.88rem;opacity:0;pointer-events:none;transition:.2s;z-index:30;max-width:90vw}
+#toast.on{opacity:1;transform:translate(-50%,0)}
+</style>
+</head>
+<body>
+<div id="app"></div>
+<dialog id="dlg"></dialog>
+<div id="toast" role="status" aria-live="polite"></div>
+<script>
+/* ===== Núcleo: roles, etapas, plazos, alertas (sin DOM) ===== */
+const ROLES = {
+  ap: { n: 'Aprendiz', c: '#2E7D32' },
+  it: { n: 'Instructor técnico', c: '#00838F' },
+  is: { n: 'Instructor de seguimiento', c: '#1565C0' },
+  ca: { n: 'Coordinación Académica', c: '#6A1B9A' },
+  cm: { n: 'Coordinación Misional', c: '#AD1457' },
+  rc: { n: 'Resp. contrato de aprendizaje', c: '#EF6C00' },
+  cf: { n: 'Ente co-formador', c: '#5D4037' },
+  co: { n: 'Comité de evaluación y seguimiento', c: '#C62828' }
+};
+const SCOPED = ['ap', 'cf', 'is'];
+
+const ALTS = ['Contrato de aprendizaje', 'Contrato de vínculo formativo', 'Monitoria', 'Proyecto productivo', 'Vínculo laboral', 'Economía popular / campesina'];
+const INSTRUCTORES = ['Rafael Bermúdez Daza', 'Diana Pinto Cotes', 'Luis Ángel Mejía'];
+
+const STEPS = ['Lectiva', 'Alternativa', 'Aval', 'SofiaPlus', 'ARL', 'Planeación', 'Ejecución', 'Evaluación', 'Juicio', 'Certificación', 'Certificado'];
+
+/* plazo.t: hab = días hábiles desde que entra a la etapa; cal = días calendario (desde base o desde que entra);
+   campo = fecha guardada en el registro; custom = fecha definida en la acción */
+const ST = {
+  lectiva: { n: 'Etapa lectiva', step: 0, resp: ['it'], plazo: { t: 'campo', f: 'finLectiva' }, doc: 'Juicios de RAP en SofiaPlus', regla: 'El aval exige el 100 % de los RAP de lectiva evaluados, aprobados y cargados en SofiaPlus. Contrato de aprendizaje puede elegirse desde la inducción y vínculo laboral desde el último trimestre.' },
+  seleccion: { n: 'Selección de alternativa', step: 1, resp: ['ap'], plazo: { t: 'campo', f: 'finGrupo' }, doc: 'GFPI-F-165', regla: 'El aprendiz radica el F-165 con los soportes. Si llega la fecha fin del grupo sin planeación F-023 avalada, incurre en deserción (art. 30, Acuerdo 009 de 2024).' },
+  revision_aval: { n: 'Aval de la alternativa', step: 2, resp: ['ca'], plazo: { t: 'hab', d: 8 }, doc: 'GFPI-F-165 y soportes', regla: 'Respuesta máxima de 8 días hábiles. Si procede, se comunica por correo y se designa instructor de seguimiento; si no, se explican las razones.' },
+  revision_contrato: { n: 'Validación del contrato de aprendizaje', step: 2, resp: ['rc'], plazo: { t: 'hab', d: 8 }, doc: 'SGVA', regla: 'El responsable de contrato valida y le informa a la Coordinación Académica los contratos firmados para que asigne instructor de seguimiento.' },
+  registro: { n: 'Registro en SofiaPlus', step: 3, resp: ['cm'], plazo: { t: 'hab', d: 8 }, doc: 'SofiaPlus', regla: 'La alternativa avalada debe verse en SofiaPlus en máximo 8 días hábiles, con fechas reales de inicio y fin.' },
+  arl: { n: 'Afiliación a ARL', step: 4, resp: ['cf', 'is'], plazo: { t: 'campo', f: 'inicioEP', off: -1 }, doc: 'Certificado ARL, EPS activa', regla: 'El co-formador afilia a la ARL mínimo un día antes del inicio (Decreto 055 de 2015). El instructor verifica ARL y elementos de protección.' },
+  planeacion: { n: 'Momento 1: planeación', step: 5, resp: ['ap', 'is', 'cf'], plazo: { t: 'cal', d: 15, base: 'inicioEP' }, doc: 'GFPI-F-023', regla: 'Plan con mínimo dos actividades ligadas a competencias técnicas, cronograma y evidencias, firmado por las tres partes en máximo 15 días desde el inicio.' },
+  ejecucion: { n: 'Ejecución y bitácoras', step: 6, resp: ['ap', 'is'], plazo: { t: 'campo', f: 'finEP' }, doc: 'GFPI-F-147', regla: 'De 1 a 2 bitácoras al mes. El instructor retroalimenta en máximo 5 días hábiles y no recibe la siguiente sin evaluar la anterior. Momento 2 al 50 % del tiempo.' },
+  mejora: { n: 'Plan de mejoramiento', step: 6, detour: true, resp: ['ap', 'is'], plazo: { t: 'custom' }, doc: 'GFPI-F-023 (observaciones)', regla: 'Lo evalúa exclusivamente el instructor de seguimiento, para que el co-formador no sea juez y parte. Si no se cumple: segundo plan o Comité.' },
+  comite: { n: 'Comité de evaluación y seguimiento', step: 6, detour: true, resp: ['co'], plazo: null, doc: 'Acta de comité', regla: 'Recomienda por escrito a la Subdirección: continuidad, aplazamiento o juicio no aprobado, garantizando el debido proceso.' },
+  cambio: { n: 'Cambio de alternativa', step: 6, detour: true, resp: ['ca'], plazo: { t: 'hab', d: 15 }, doc: 'GFPI-F-165', regla: 'Máximo 3 cambios en todo el proceso; respuesta en máximo 15 días hábiles. Las horas ya ejecutadas se suman con la constancia de la alternativa anterior.' },
+  aplazado: { n: 'Aplazamiento', step: 6, detour: true, resp: ['ca'], plazo: null, doc: 'Decisión de comité', regla: 'Al reanudar, se ajustan las fechas del plan de trabajo sin afectar los resultados de aprendizaje.' },
+  evaluacion: { n: 'Momento 3: evaluación final', step: 7, resp: ['is', 'cf'], plazo: { t: 'campo', f: 'finEP' }, doc: 'GFPI-F-023 y constancia', regla: 'Antes de la fecha fin: todas las bitácoras retroalimentadas, constancia con los datos obligatorios y reunión de cierre.' },
+  juicio: { n: 'Juicio evaluativo', step: 8, resp: ['is'], plazo: { t: 'cal', d: 8 }, doc: 'SofiaPlus', regla: 'Registrar APROBADO en máximo 8 días. No puede supeditarse a Saber TyT ni a documentos de certificación (Circular 3-2023-000160).' },
+  certificacion: { n: 'Paz y salvo y certificación', step: 9, resp: ['cm'], plazo: null, doc: 'GFPI-G-018', regla: 'Con el juicio registrado se emite el paz y salvo y se inicia la certificación.' },
+  certificado: { n: 'Certificado', step: 10, final: true, resp: [], plazo: null, doc: '', regla: 'Proceso terminado.' },
+  no_aprobado: { n: 'No aprobado', step: 7, final: true, bad: true, resp: [], plazo: null, doc: 'Acta de comité', regla: 'Juicio NO APROBADO tras el debido proceso.' }
+};
+
+/* ---- fechas ---- */
+const pad = n => String(n).padStart(2, '0');
+const D = s => new Date(s + 'T00:00:00');
+const iso = d => d.getFullYear() + '-' + pad(d.getMonth() + 1) + '-' + pad(d.getDate());
+const addDays = (s, n) => { const d = D(s); d.setDate(d.getDate() + n); return iso(d); };
+const addMonths = (s, m) => { const d = D(s); d.setMonth(d.getMonth() + m); return iso(d); };
+const addBD = (s, n) => { const d = D(s); let c = 0; while (c < n) { d.setDate(d.getDate() + 1); const w = d.getDay(); if (w !== 0 && w !== 6) c++; } return iso(d); };
+const bdBetween = (a, b) => { if (b <= a) return 0; const d = D(a); let c = 0; while (iso(d) < b) { d.setDate(d.getDate() + 1); const w = d.getDay(); if (w !== 0 && w !== 6) c++; } return c; };
+const diffDays = (a, b) => Math.round((D(b) - D(a)) / 864e5);
+const realToday = () => iso(new Date());
+
+function due(a) {
+  const p = ST[a.stage].plazo; if (!p) return null;
+  if (p.t === 'hab') return addBD(a.since, p.d);
+  if (p.t === 'cal') { const b = p.base ? a[p.base] : a.since; return b ? addDays(b, p.d) : null; }
+  if (p.t === 'campo') return a[p.f] ? (p.off ? addDays(a[p.f], p.off) : a[p.f]) : null;
+  if (p.t === 'custom') return a.customDue || null;
+  return null;
+}
+function sem(a, hoy) {
+  const d = due(a); if (!d || ST[a.stage].final) return { k: 'none', d: null, txt: '' };
+  const n = diffDays(hoy, d);
+  if (n < 0) return { k: 'red', d, txt: 'Vencido hace ' + (-n) + (n === -1 ? ' día' : ' días') };
+  if (n === 0) return { k: 'amber', d, txt: 'Vence hoy' };
+  if (n <= 3) return { k: 'amber', d, txt: 'Vence en ' + n + (n === 1 ? ' día' : ' días') };
+  return { k: 'green', d, txt: 'Al día' };
+}
+const allSigned = a => !!(a.firmas && a.firmas.ap && a.firmas.is && a.firmas.cf);
+const pendingBit = a => (a.bits || []).find(b => !b.retro);
+
+function alerts(a, hoy) {
+  const out = []; const st = ST[a.stage]; if (st.final) return out;
+  const s = sem(a, hoy);
+  if (s.k === 'red' && a.stage !== 'juicio') out.push({ to: st.resp, k: 'red', txt: 'Plazo vencido en «' + st.n + '»' });
+  const pre = ['seleccion', 'revision_aval', 'revision_contrato', 'registro', 'arl', 'planeacion'];
+  if (pre.includes(a.stage) && !allSigned(a) && a.finGrupo) {
+    const n = diffDays(hoy, a.finGrupo);
+    if (n < 0) out.push({ to: ['ap', 'ca', 'is'], k: 'red', txt: 'Fecha fin del grupo superada sin F-023 avalado: causal de deserción' });
+    else if (n <= 30) out.push({ to: ['ap', 'ca', 'is'], k: 'amber', txt: 'Riesgo de deserción: faltan ' + n + ' días para la fecha fin del grupo y no hay planeación avalada' });
+  }
+  if (['ejecucion', 'evaluacion', 'mejora'].includes(a.stage)) {
+    const p = pendingBit(a);
+    if (p) { const h = bdBetween(p.entregada, hoy); if (h > 5) out.push({ to: ['is'], k: 'red', txt: 'Bitácora ' + p.n + ' sin retroalimentar hace ' + h + ' días hábiles (máx. 5)' }); }
+  }
+  if (a.stage === 'ejecucion') {
+    const last = (a.bits || []).length ? a.bits[a.bits.length - 1].entregada : a.inicioEP;
+    if (last && diffDays(last, hoy) > 30) out.push({ to: ['ap'], k: 'amber', txt: 'Más de un mes sin entregar bitácora' });
+    if (!a.m2 && a.inicioEP && a.finEP) {
+      const mid = addDays(a.inicioEP, Math.round(diffDays(a.inicioEP, a.finEP) / 2));
+      if (hoy >= mid) out.push({ to: ['is'], k: 'amber', txt: 'Ya corresponde el Momento 2 (50 % del tiempo)' });
+    }
+    if (a.finEP && diffDays(hoy, a.finEP) <= 10) out.push({ to: ['is', 'cf'], k: 'amber', txt: 'Programar el Momento 3 antes del ' + a.finEP });
+  }
+  if (a.stage === 'evaluacion' && !a.docs.constancia) out.push({ to: ['cf'], k: 'amber', txt: 'Falta la constancia de cumplimiento' });
+  if (a.stage === 'juicio' && diffDays(a.since, hoy) > 8) out.push({ to: ['is', 'ca'], k: 'red', txt: 'Juicio retenido ' + diffDays(a.since, hoy) + ' días: debe registrarse en máx. 8 y no depende de Saber TyT' });
+  if (!a.instructor && st.step >= 3) out.push({ to: ['ca'], k: 'red', txt: 'Sin instructor de seguimiento designado' });
+  return out;
+}
+
+/* ---- notificaciones ---- */
+let _seq = 0;
+const uid = () => Date.now().toString(36) + (++_seq).toString(36) + Math.random().toString(36).slice(2, 6);
+function mkNotif(role, a, msg, hoy) {
+  return { id: uid(), role, ap: a.id, nom: a.nombre, emp: a.empresa || '', ins: a.instructor || '', msg, f: hoy, ts: Date.now(), leida: false };
+}
+function stageNotifs(a, hoy) {
+  const st = ST[a.stage]; const d = due(a); const out = [];
+  const pz = d ? ' Plazo: ' + d + '.' : '';
+  st.resp.forEach(r => out.push(mkNotif(r, a, 'Le corresponde intervenir en «' + st.n + '».' + pz, hoy)));
+  if (!st.resp.includes('ap')) out.push(mkNotif('ap', a, 'Tu proceso pasó a «' + st.n + '».', hoy));
+  return out;
+}
+
+/* ---- datos de demostración ---- */
+function seed(H) {
+  const base = {
+    alt: '', empresa: '', instructor: '', inicioEP: '', finEP: '', firmas: {},
+    docs: { f165: false, arl: false, f023: false, constancia: false },
+    bits: [], m2: false, cambios: 0, altPrev: [], ret: '', customDue: '', comiteMotivo: '', mejoraEnt: false, solicCambio: null, aplazIni: '', hist: []
+  };
+  const P = {
+    gc: { programa: 'Tecnología en Gestión Contable y de Información Financiera (123101)', ficha: '2876541' },
+    me: { programa: 'Tecnología en Mecanización para la Agricultura Inteligente (722105)', ficha: '2765432' },
+    co: { programa: 'Técnico en Cocina (635503)', ficha: '2901187' }
+  };
+  const mk = (o) => {
+    const a = JSON.parse(JSON.stringify(base));
+    Object.assign(a, P[o.p], o); delete a.p;
+    a.docs = Object.assign({ f165: false, arl: false, f023: false, constancia: false }, o.docs || {});
+    return a;
+  };
+  const h = (f, r, t) => ({ f, r, t });
+  const bits = (ini, n, lastOpen) => Array.from({ length: n }, (_, i) => {
+    const e = addDays(ini, 25 + i * 28);
+    return { n: i + 1, entregada: e, retro: (lastOpen && i === n - 1) ? null : addDays(e, 3) };
+  });
+  const aps = [
+    mk({ id: 'ap01', nombre: 'Valentina Ospina Brito', doc: '1.118.874.205', p: 'gc', stage: 'lectiva', since: addDays(H, -60), finLectiva: addDays(H, 9), finGrupo: addDays(H, 190),
+      hist: [h(addDays(H, -60), 'it', 'Inicia el último trimestre de etapa lectiva')] }),
+    mk({ id: 'ap02', nombre: 'Carlos Mendoza Iguarán', doc: '1.124.503.981', p: 'me', stage: 'seleccion', since: addDays(H, -150), finLectiva: addDays(H, -150), finGrupo: addDays(H, 12),
+      hist: [h(addDays(H, -150), 'it', 'Instructor técnico confirmó 100 % de RAP cargados en SofiaPlus')] }),
+    mk({ id: 'ap03', nombre: 'Daniela Pushaina Epiayú', doc: '1.123.990.412', p: 'co', alt: 'Contrato de vínculo formativo', empresa: 'Restaurante El Fogón Guajiro', stage: 'revision_aval', since: addDays(H, -15), finLectiva: addDays(H, -20), finGrupo: addDays(H, 150), docs: { f165: true },
+      hist: [h(addDays(H, -20), 'it', 'Instructor técnico confirmó 100 % de RAP cargados en SofiaPlus'), h(addDays(H, -15), 'ap', 'Radicó GFPI-F-165: Contrato de vínculo formativo en Restaurante El Fogón Guajiro')] }),
+    mk({ id: 'ap04', nombre: 'Andrés Felipe Romero Ariza', doc: '1.006.871.330', p: 'me', alt: 'Contrato de aprendizaje', empresa: 'Agrícola La Esperanza S.A.S.', instructor: 'Rafael Bermúdez Daza', stage: 'planeacion', since: addDays(H, -18), inicioEP: addDays(H, -18), finEP: addMonths(addDays(H, -18), 6), finLectiva: addDays(H, -25), finGrupo: addDays(H, 160), firmas: { ap: true }, docs: { f165: true, arl: true },
+      hist: [h(addDays(H, -30), 'rc', 'Contrato de aprendizaje validado en SGVA'), h(addDays(H, -24), 'cm', 'Alternativa registrada en SofiaPlus'), h(addDays(H, -19), 'is', 'ARL, EPS y EPP verificados'), h(addDays(H, -16), 'ap', 'Aprendiz firmó el plan GFPI-F-023')] }),
+    mk({ id: 'ap05', nombre: 'Laura Camila Fuentes Rojas', doc: '1.118.402.776', p: 'gc', alt: 'Contrato de vínculo formativo', empresa: 'Contadores Asociados del Sur', instructor: 'Diana Pinto Cotes', stage: 'ejecucion', since: addDays(H, -85), inicioEP: addDays(H, -95), finEP: addMonths(addDays(H, -95), 6), finLectiva: addDays(H, -100), finGrupo: addDays(H, 80), firmas: { ap: true, is: true, cf: true }, docs: { f165: true, arl: true, f023: true },
+      bits: [{ n: 1, entregada: addDays(H, -65), retro: addDays(H, -62) }, { n: 2, entregada: addDays(H, -40), retro: addDays(H, -37) }, { n: 3, entregada: addDays(H, -8), retro: null }],
+      hist: [h(addDays(H, -85), 'is', 'Plan F-023 firmado por las tres partes'), h(addDays(H, -8), 'ap', 'Entregó la bitácora 3')] }),
+    mk({ id: 'ap06', nombre: 'Jhon Freddy Arregocés Pimienta', doc: '1.120.355.098', p: 'co', alt: 'Vínculo laboral', empresa: 'Hotel Brisas de Fonseca', instructor: 'Diana Pinto Cotes', stage: 'juicio', since: addDays(H, -13), inicioEP: addDays(H, -200), finEP: addDays(H, -15), finLectiva: addDays(H, -205), finGrupo: addDays(H, 20), m2: true, firmas: { ap: true, is: true, cf: true }, docs: { f165: true, arl: true, f023: true, constancia: true },
+      bits: bits(addDays(H, -200), 6, false),
+      hist: [h(addDays(H, -16), 'cf', 'Cargó la constancia de cumplimiento'), h(addDays(H, -13), 'is', 'Evaluación final positiva registrada en F-023')] }),
+    mk({ id: 'ap07', nombre: 'María José Bolaño Choles', doc: '1.124.778.610', p: 'me', alt: 'Proyecto productivo', empresa: 'SENA Empresa CAA', instructor: 'Rafael Bermúdez Daza', stage: 'evaluacion', since: addDays(H, -3), inicioEP: addDays(H, -178), finEP: addDays(H, 5), finLectiva: addDays(H, -185), finGrupo: addDays(H, 30), m2: true, firmas: { ap: true, is: true, cf: true }, docs: { f165: true, arl: true, f023: true },
+      bits: bits(addDays(H, -178), 6, false),
+      hist: [h(addDays(H, -90), 'is', 'Momento 2 satisfactorio'), h(addDays(H, -3), 'is', 'Inició el Momento 3')] }),
+    mk({ id: 'ap08', nombre: 'Kevin Andrés Gámez Solano', doc: '1.006.120.447', p: 'gc', alt: 'Monitoria', empresa: 'CAA Fonseca (monitoria)', instructor: 'Luis Ángel Mejía', stage: 'mejora', since: addDays(H, -6), customDue: addBD(addDays(H, -6), 10), ret: 'ejecucion', inicioEP: addDays(H, -70), finEP: addMonths(addDays(H, -70), 6), finLectiva: addDays(H, -75), finGrupo: addDays(H, 110), m2: true, firmas: { ap: true, is: true, cf: true }, docs: { f165: true, arl: true, f023: true },
+      bits: bits(addDays(H, -70), 2, false),
+      hist: [h(addDays(H, -6), 'is', 'Momento 2: requiere plan de mejoramiento (puntualidad en entregas)')] }),
+    mk({ id: 'ap09', nombre: 'Sharon Daza Mindiola', doc: '1.118.660.913', p: 'co', alt: 'Contrato de aprendizaje', empresa: 'Comedor Industrial La Guajira', instructor: 'Luis Ángel Mejía', stage: 'certificado', since: addDays(H, -20), inicioEP: addDays(H, -230), finEP: addDays(H, -50), finLectiva: addDays(H, -235), finGrupo: addDays(H, -40), m2: true, firmas: { ap: true, is: true, cf: true }, docs: { f165: true, arl: true, f023: true, constancia: true },
+      bits: bits(addDays(H, -230), 6, false),
+      hist: [h(addDays(H, -45), 'is', 'Juicio APROBADO registrado en SofiaPlus'), h(addDays(H, -20), 'cm', 'Paz y salvo emitido y aprendiz certificada')] }),
+    mk({ id: 'ap10', nombre: 'Yeiner Brito Fragozo', doc: '1.124.091.538', p: 'me', alt: 'Vínculo laboral', empresa: 'Cooperativa Algodonera de Fonseca', instructor: 'Luis Ángel Mejía', stage: 'arl', since: addDays(H, -2), inicioEP: addDays(H, 4), finEP: addMonths(addDays(H, 4), 6), finLectiva: addDays(H, -10), finGrupo: addDays(H, 170), docs: { f165: true },
+      hist: [h(addDays(H, -9), 'ca', 'Aval otorgado. Instructor de seguimiento: Luis Ángel Mejía'), h(addDays(H, -2), 'cm', 'Alternativa registrada en SofiaPlus')] }),
+    mk({ id: 'ap11', nombre: 'Natalia Quintero Amaya', doc: '1.118.513.204', p: 'gc', alt: 'Vínculo laboral', empresa: 'Distribuidora Fonseca Ltda.', instructor: 'Rafael Bermúdez Daza', stage: 'comite', since: addDays(H, -5), ret: 'ejecucion', comiteMotivo: 'Incumplimiento del plan de mejoramiento', inicioEP: addDays(H, -110), finEP: addMonths(addDays(H, -110), 6), finLectiva: addDays(H, -115), finGrupo: addDays(H, 60), m2: true, firmas: { ap: true, is: true, cf: true }, docs: { f165: true, arl: true, f023: true },
+      bits: bits(addDays(H, -110), 3, false),
+      hist: [h(addDays(H, -5), 'is', 'Plan de mejoramiento no cumplido: remitido a Comité')] }),
+    mk({ id: 'ap12', nombre: 'Jesús David Ustate Romero', doc: '1.120.887.162', p: 'co', alt: 'Proyecto productivo', empresa: 'SENA Empresa CAA', instructor: 'Luis Ángel Mejía', stage: 'registro', since: addDays(H, -4), finLectiva: addDays(H, -12), finGrupo: addDays(H, 165), docs: { f165: true },
+      hist: [h(addDays(H, -4), 'ca', 'Aval otorgado. Instructor de seguimiento: Luis Ángel Mejía')] })
+  ];
+  const notifs = [];
+  aps.forEach(a => { if (!ST[a.stage].final) stageNotifs(a, a.since).forEach(n => notifs.push(n)); });
+  return { aps, notifs };
+}
+
+
+
+/* ===== Interfaz ===== */
+const S = { mode: 'loading', aps: {}, notifs: {}, cfg: { hoy: '' }, role: 'ca', ident: '', tab: 'pend', open: null, q: '', fstage: '' };
+let DB = null;
+const LS = 'rutaEP_v1';
+const $ = (sel, el = document) => el.querySelector(sel);
+const esc = s => String(s == null ? '' : s).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+const hoy = () => S.cfg.hoy || realToday();
+const fmt = s => s ? D(s).toLocaleDateString('es-CO', { day: '2-digit', month: 'short', year: 'numeric' }).replace('.', '') : '—';
+const apsArr = () => Object.values(S.aps).sort((a, b) => a.nombre.localeCompare(b.nombre));
+
+/* ---------- almacenamiento ---------- */
+function saveLocal() { try { localStorage.setItem(LS, JSON.stringify({ aps: S.aps, notifs: S.notifs, cfg: S.cfg })); } catch (e) { } }
+function loadLocal() { try { const r = JSON.parse(localStorage.getItem(LS) || 'null'); if (r) { S.aps = r.aps || {}; S.notifs = r.notifs || {}; S.cfg = r.cfg || { hoy: '' }; } } catch (e) { } }
+const plain = o => JSON.parse(JSON.stringify(o));
+async function saveAp(a) {
+  S.aps[a.id] = a;
+  if (S.mode === 'db') { try { await DB.collection('aprendices').doc(a.id).set(plain(a)); } catch (e) { toast(writeErr(e)); } }
+  else saveLocal();
+}
+async function addNotifs(list) {
+  list.forEach(n => S.notifs[n.id] = n);
+  if (S.mode === 'db') { for (const n of list) { try { await DB.collection('notificaciones').doc(n.id).set(plain(n)); } catch (e) { toast(writeErr(e)); break; } } }
+  else saveLocal();
+}
+async function markRead(ids) {
+  for (const id of ids) {
+    const n = S.notifs[id]; if (!n || n.leida) continue; n.leida = true;
+    if (S.mode === 'db') { try { await DB.collection('notificaciones').doc(id).update({ leida: true }); } catch (e) { } }
+  }
+  if (S.mode !== 'db') saveLocal();
+}
+async function saveCfg() {
+  if (S.mode === 'db') { try { await DB.doc('config/app').set(plain(S.cfg)); } catch (e) { toast(writeErr(e)); } }
+  else saveLocal();
+}
+const writeErr = e => (e && e.code === 'not_granted') ? 'Tienes acceso de solo lectura: no se guardó el cambio.' : 'No se pudo guardar el cambio. Intenta de nuevo.';
+
+async function loadDemo() {
+  const { aps, notifs } = seed(hoy());
+  if (S.mode === 'db') {
+    for (const id of Object.keys(S.aps)) { try { await DB.collection('aprendices').doc(id).delete(); } catch (e) { } }
+    for (const id of Object.keys(S.notifs)) { try { await DB.collection('notificaciones').doc(id).delete(); } catch (e) { } }
+  }
+  S.aps = {}; S.notifs = {};
+  for (const a of aps) await saveAp(a);
+  await addNotifs(notifs);
+  S.open = null; render(); toast('Datos de demostración cargados.');
+}
+
+async function initStore() {
+  render();
+  let db = null;
+  try { db = window.claude && window.claude.use ? await window.claude.use('db') : null; } catch (e) { db = null; }
+  if (db) {
+    DB = db; S.mode = 'db';
+    DB.collection('aprendices').onSnapshot(s => { const m = {}; s.docs.forEach(d => m[d.id] = d.data()); S.aps = m; render(); }, () => toast('Se perdió la conexión con los datos compartidos.'));
+    DB.collection('notificaciones').onSnapshot(s => { const m = {}; s.docs.forEach(d => m[d.id] = d.data()); S.notifs = m; render(); });
+    DB.doc('config/app').onSnapshot(s => { S.cfg = (s.exists && s.data()) || { hoy: '' }; render(); });
+  } else { S.mode = 'local'; loadLocal(); render(); }
+}
+
+/* ---------- visibilidad por rol ---------- */
+function identOpts(role) {
+  if (role === 'ap') return apsArr().map(a => [a.id, a.nombre]);
+  if (role === 'cf') return [...new Set(apsArr().map(a => a.empresa).filter(Boolean))].sort().map(e => [e, e]);
+  if (role === 'is') return INSTRUCTORES.map(i => [i, i]);
+  return [];
+}
+function ensureIdent() {
+  const o = identOpts(S.role);
+  if (!o.length) { S.ident = ''; return; }
+  if (!o.some(x => x[0] === S.ident)) S.ident = o[0][0];
+}
+function visible(a) {
+  if (S.role === 'ap') return a.id === S.ident;
+  if (S.role === 'cf') return a.empresa === S.ident;
+  if (S.role === 'is') return a.instructor === S.ident;
+  return true;
+}
+function notifVisible(n) {
+  if (n.role !== S.role) return false;
+  if (S.role === 'ap') return n.ap === S.ident;
+  if (S.role === 'cf') return n.emp === S.ident;
+  if (S.role === 'is') return n.ins === S.ident;
+  return true;
+}
+const myNotifs = () => Object.values(S.notifs).filter(notifVisible).sort((a, b) => b.ts - a.ts);
+
+/* ---------- acciones ---------- */
+async function go(a, role, to, text, extra = []) {
+  a = plain(a);
+  a.hist.push({ f: hoy(), r: role, t: text });
+  let ns = [...extra.map(([r, m]) => mkNotif(r, a, m, hoy()))];
+  if (to && to !== a.stage) { a.stage = to; a.since = hoy(); ns = ns.concat(stageNotifs(a, hoy())); }
+  await saveAp(a); await addNotifs(ns);
+  render(); toast('Listo: ' + text.charAt(0).toLowerCase() + text.slice(1));
+}
+const F = {
+  alt: (opts = ALTS) => ({ k: 'alt', label: 'Alternativa', type: 'select', opts }),
+  emp: v => ({ k: 'emp', label: 'Empresa o escenario de práctica', type: 'text', val: v || '', req: true }),
+  ins: v => ({ k: 'ins', label: 'Instructor de seguimiento', type: 'select', opts: INSTRUCTORES, val: v }),
+  mot: (l = 'Motivo') => ({ k: 'mot', label: l, type: 'textarea', req: true })
+};
+
+function acts(a0, role) {
+  const a = plain(a0); const A = []; const add = o => A.push(o);
+  const st = ST[a.stage]; const H = hoy();
+  const cambio = () => add({ label: 'Solicitar cambio de alternativa', kind: 'ghost', dis: a.cambios >= 3, why: 'Ya usó los 3 cambios permitidos',
+    form: { title: 'Cambio de alternativa (F-165)', fields: [F.alt(ALTS.filter(x => x !== a.alt)), { k: 'mot', label: 'Causa', type: 'select', opts: ['Liquidación de la empresa', 'Salud certificada por la EPS', 'Asuntos judiciales', 'Servicio militar', 'Desplazamiento a otra región o país', 'Otra causa justificada'] }] },
+    run: v => { a.solicCambio = { alt: v.alt, mot: v.mot }; a.ret = a.stage; return go(a, role, 'cambio', 'Solicitó cambio a ' + v.alt + ' (' + v.mot + ')'); } });
+  const novedad = () => add({ label: 'Reportar novedad', kind: 'ghost',
+    form: { title: 'Reportar novedad', fields: [{ k: 'tipo', label: 'Tipo', type: 'select', opts: ['Incapacidad certificada', 'Licencia de maternidad', 'Vacaciones otorgadas por el empleador', 'Fuerza mayor o caso fortuito', 'Falta académica o disciplinaria', 'Otra'] }, { k: 'det', label: 'Detalle', type: 'textarea', req: true }] },
+    run: v => go(a, role, null, 'Novedad: ' + v.tipo + '. ' + v.det, [['is', 'Novedad de ' + a.nombre + ': ' + v.tipo + '. Registrar en F-023 en máx. 3 días hábiles.'], ['ca', 'Novedad de ' + a.nombre + ': ' + v.tipo + '.']].filter(x => x[0] !== role)) });
+
+  switch (a.stage) {
+    case 'lectiva':
+      if (role === 'it') add({ label: 'Confirmar 100 % de RAP cargados en SofiaPlus', run: () => go(a, role, 'seleccion', 'Instructor técnico confirmó 100 % de RAP cargados en SofiaPlus') });
+      if (role === 'ap') add({ label: 'Radicar F-165 anticipado', kind: 'ghost', note: 'Solo contrato de aprendizaje o vínculo laboral (último trimestre)',
+        form: { title: 'Radicar GFPI-F-165 anticipado', fields: [F.alt(['Contrato de aprendizaje', 'Vínculo laboral']), F.emp()] },
+        run: v => { a.alt = v.alt; a.empresa = v.emp; a.docs.f165 = true; return go(a, role, v.alt === 'Contrato de aprendizaje' ? 'revision_contrato' : 'revision_aval', 'Radicó GFPI-F-165: ' + v.alt + ' en ' + v.emp); } });
+      break;
+    case 'seleccion':
+      if (role === 'ap') add({ label: 'Radicar GFPI-F-165', form: { title: 'Radicar GFPI-F-165', fields: [F.alt(), F.emp(a.empresa)] },
+        run: v => { a.alt = v.alt; a.empresa = v.emp; a.docs.f165 = true; return go(a, role, v.alt === 'Contrato de aprendizaje' ? 'revision_contrato' : 'revision_aval', 'Radicó GFPI-F-165: ' + v.alt + ' en ' + v.emp); } });
+      break;
+    case 'revision_aval':
+      if (role === 'ca') {
+        add({ label: 'Otorgar aval y designar instructor', form: { title: 'Otorgar aval', fields: [F.ins(a.instructor)] },
+          run: v => { a.instructor = v.ins; return go(a, role, 'registro', 'Aval otorgado. Instructor de seguimiento: ' + v.ins, [['is', 'Fue designado instructor de seguimiento de ' + a.nombre + ' (' + a.alt + ').']]); } });
+        add({ label: 'Devolver solicitud', kind: 'ghost', form: { title: 'Devolver solicitud', fields: [F.mot('Razones de la decisión')] },
+          run: v => { a.docs.f165 = false; return go(a, role, 'seleccion', 'Solicitud no procedente: ' + v.mot); } });
+      }
+      break;
+    case 'revision_contrato':
+      if (role === 'rc') {
+        add({ label: 'Validar contrato firmado', run: () => go(a, role, 'registro', 'Contrato de aprendizaje validado en SGVA', a.instructor ? [] : [['ca', 'Designar instructor de seguimiento para ' + a.nombre + ' (contrato de aprendizaje).']]) });
+        add({ label: 'Sin patrocinio: devolver', kind: 'ghost', form: { title: 'Devolver al aprendiz', fields: [F.mot()] },
+          run: v => { a.docs.f165 = false; return go(a, role, 'seleccion', 'Contrato no concretado: ' + v.mot); } });
+      }
+      break;
+    case 'registro':
+      if (role === 'cm') add({ label: 'Registrar alternativa en SofiaPlus',
+        form: { title: 'Registro en SofiaPlus', fields: [{ k: 'ini', label: 'Fecha de inicio de la etapa productiva', type: 'date', val: addBD(H, 3) }, { k: 'mes', label: 'Duración según diseño curricular (meses)', type: 'number', val: a.finEP && a.inicioEP ? 3 : 6 }] },
+        run: v => { a.inicioEP = v.ini; a.finEP = addMonths(v.ini, +v.mes || 6); return go(a, role, 'arl', 'Alternativa registrada en SofiaPlus. Inicio ' + v.ini + ', fin ' + a.finEP); } });
+      break;
+    case 'arl':
+      if (role === 'cf' && !a.docs.arl) add({ label: 'Cargar afiliación ARL', run: () => { a.docs.arl = true; return go(a, role, null, 'Co-formador cargó la afiliación a ARL', [['is', 'ARL de ' + a.nombre + ' cargada: pendiente verificar ARL, EPS y EPP.']]); } });
+      if (role === 'is') add({ label: 'Verificar ARL, EPS y EPP', dis: !a.docs.arl, why: 'El co-formador aún no carga la ARL', run: () => go(a, role, 'planeacion', 'ARL, EPS y EPP verificados') });
+      if (role === 'ap') cambio();
+      break;
+    case 'planeacion': {
+      const lab = { ap: 'Presentar y firmar el plan F-023', is: 'Revisar pertinencia y firmar el plan', cf: 'Firmar el plan de trabajo' };
+      if (lab[role] && !a.firmas[role]) add({ label: lab[role], run: () => {
+        a.firmas[role] = true;
+        if (allSigned(a)) { a.docs.f023 = true; return go(a, role, 'ejecucion', 'Plan F-023 firmado por las tres partes'); }
+        const faltan = ['ap', 'is', 'cf'].filter(r => !a.firmas[r]);
+        return go(a, role, null, ROLES[role].n + ' firmó el plan F-023', faltan.map(r => [r, 'Falta tu firma en el plan F-023 de ' + a.nombre + '.']));
+      } });
+      if (role === 'ap') cambio();
+      break;
+    }
+    case 'ejecucion': {
+      const p = pendingBit(a); const n = a.bits.length + 1;
+      const mes = a.bits.filter(b => diffDays(b.entregada, H) < 30).length;
+      if (role === 'ap') {
+        add({ label: 'Entregar bitácora ' + n, dis: !!p || mes >= 2, why: p ? 'La bitácora ' + p.n + ' aún no tiene retroalimentación' : 'Máximo 2 bitácoras por mes',
+          run: () => { a.bits.push({ n, entregada: H, retro: null }); return go(a, role, null, 'Entregó la bitácora ' + n, [['is', 'Bitácora ' + n + ' de ' + a.nombre + ' recibida. Retroalimentar antes del ' + addBD(H, 5) + '.']]); } });
+        cambio();
+        add({ label: 'Solicitar aplazamiento', kind: 'ghost', form: { title: 'Solicitar aplazamiento', fields: [F.mot('Motivo y soporte')] },
+          run: v => { a.ret = 'ejecucion'; a.comiteMotivo = 'Solicitud de aplazamiento: ' + v.mot; return go(a, role, 'comite', 'Solicitó aplazamiento: ' + v.mot); } });
+      }
+      if (role === 'is') {
+        if (p) add({ label: 'Retroalimentar bitácora ' + p.n, run: () => { a.bits.find(b => b.n === p.n).retro = H; return go(a, role, null, 'Retroalimentó la bitácora ' + p.n, [['ap', 'Tu bitácora ' + p.n + ' fue retroalimentada.']]); } });
+        if (!a.m2) add({ label: 'Registrar Momento 2 (50 %)', form: { title: 'Momento 2 de seguimiento', fields: [{ k: 'res', label: 'Resultado', type: 'select', opts: ['Satisfactorio', 'Requiere plan de mejoramiento'] }, { k: 'obs', label: 'Observaciones del co-formador y del instructor', type: 'textarea' }] },
+          run: v => { a.m2 = true; const o = v.obs ? ' ' + v.obs : '';
+            if (v.res === 'Satisfactorio') return go(a, role, null, 'Momento 2 satisfactorio.' + o, [['ap', 'Momento 2 registrado como satisfactorio.'], ['cf', 'Momento 2 de ' + a.nombre + ' registrado.']]);
+            a.ret = 'ejecucion'; a.customDue = addBD(H, 10); return go(a, role, 'mejora', 'Momento 2: requiere plan de mejoramiento.' + o); } });
+        if (a.m2) add({ label: 'Iniciar Momento 3: evaluación final', run: () => go(a, role, 'evaluacion', 'Inició el Momento 3', [['cf', 'Cargar la constancia de cumplimiento de ' + a.nombre + '.']]) });
+        add({ label: 'Abrir plan de mejoramiento', kind: 'ghost', form: { title: 'Plan de mejoramiento', fields: [{ k: 'asp', label: 'Aspectos a subsanar', type: 'textarea', req: true }, { k: 'dias', label: 'Plazo (días hábiles)', type: 'number', val: 10 }] },
+          run: v => { a.ret = 'ejecucion'; a.customDue = addBD(H, +v.dias || 10); return go(a, role, 'mejora', 'Plan de mejoramiento: ' + v.asp); } });
+      }
+      if (['ap', 'is', 'cf'].includes(role)) novedad();
+      break;
+    }
+    case 'mejora':
+      if (role === 'ap' && !a.mejoraEnt) add({ label: 'Entregar evidencias del plan', run: () => { a.mejoraEnt = true; return go(a, role, null, 'Entregó evidencias del plan de mejoramiento', [['is', 'Evidencias del plan de mejoramiento de ' + a.nombre + ' listas para evaluar.']]); } });
+      if (role === 'is') {
+        add({ label: 'Plan cumplido', run: () => { a.mejoraEnt = false; return go(a, role, a.ret || 'ejecucion', 'Plan de mejoramiento cumplido'); } });
+        add({ label: 'No cumplido: remitir a Comité', kind: 'danger', run: () => { a.mejoraEnt = false; a.comiteMotivo = 'Incumplimiento del plan de mejoramiento'; return go(a, role, 'comite', 'Plan de mejoramiento no cumplido: remitido a Comité'); } });
+      }
+      break;
+    case 'comite':
+      if (role === 'co') {
+        add({ label: 'Autorizar continuidad', note: 'Segundo plan o ajustes', run: () => go(a, role, a.ret || 'ejecucion', 'Comité autorizó la continuidad') });
+        add({ label: 'Aprobar aplazamiento', kind: 'ghost', run: () => { a.aplazIni = H; return go(a, role, 'aplazado', 'Comité aprobó el aplazamiento'); } });
+        add({ label: 'Recomendar juicio NO APROBADO', kind: 'danger', run: () => go(a, role, 'no_aprobado', 'Comité recomendó a la Subdirección juicio NO APROBADO') });
+      }
+      break;
+    case 'cambio':
+      if (role === 'ca') {
+        add({ label: 'Avalar cambio', note: (a.solicCambio ? 'A ' + a.solicCambio.alt : ''), run: () => {
+          a.altPrev.push(a.alt); a.alt = a.solicCambio ? a.solicCambio.alt : a.alt; a.cambios++; a.firmas = {}; a.docs.arl = false; a.docs.f023 = false;
+          return go(a, role, 'registro', 'Cambio avalado (' + a.cambios + ' de 3). Las horas ejecutadas se suman con la constancia anterior'); } });
+        add({ label: 'Negar cambio', kind: 'ghost', form: { title: 'Negar cambio', fields: [F.mot()] }, run: v => go(a, role, a.ret || 'ejecucion', 'Cambio no avalado: ' + v.mot) });
+      }
+      break;
+    case 'aplazado':
+      if (role === 'ca') add({ label: 'Reanudar etapa productiva', run: () => { const d = diffDays(a.aplazIni || H, H); if (a.finEP) a.finEP = addDays(a.finEP, d); return go(a, role, 'ejecucion', 'Etapa reanudada; fecha fin ajustada a ' + a.finEP); } });
+      break;
+    case 'evaluacion': {
+      const p = pendingBit(a);
+      if (role === 'cf' && !a.docs.constancia) add({ label: 'Cargar constancia de cumplimiento', note: 'Con nombre, documento, programa, ficha, centro, regional, fechas y funciones', run: () => { a.docs.constancia = true; return go(a, role, null, 'Co-formador cargó la constancia de cumplimiento', [['is', 'Constancia de ' + a.nombre + ' disponible.']]); } });
+      if (role === 'is') {
+        if (p) add({ label: 'Retroalimentar bitácora ' + p.n, run: () => { a.bits.find(b => b.n === p.n).retro = H; return go(a, role, null, 'Retroalimentó la bitácora ' + p.n); } });
+        add({ label: 'Registrar evaluación positiva', dis: !!p || !a.docs.constancia || !a.bits.length, why: p ? 'Hay bitácoras sin retroalimentar' : (!a.docs.constancia ? 'Falta la constancia del co-formador' : 'No hay bitácoras'),
+          run: () => go(a, role, 'juicio', 'Evaluación final positiva registrada en F-023') });
+        add({ label: 'No satisfactoria: remitir a Comité', kind: 'danger', run: () => { a.ret = 'evaluacion'; a.comiteMotivo = 'Evaluación final no satisfactoria'; return go(a, role, 'comite', 'Evaluación final no satisfactoria: remitido a Comité'); } });
+      }
+      break;
+    }
+    case 'juicio':
+      if (role === 'is') add({ label: 'Registrar juicio APROBADO en SofiaPlus', run: () => go(a, role, 'certificacion', 'Juicio APROBADO registrado en SofiaPlus') });
+      break;
+    case 'certificacion':
+      if (role === 'cm') add({ label: 'Emitir paz y salvo y certificar', run: () => go(a, role, 'certificado', 'Paz y salvo emitido y aprendiz certificado') });
+      break;
+  }
+  if (role === 'ca' && !a.instructor && st.step >= 3 && !st.final) add({ label: 'Designar instructor de seguimiento', form: { title: 'Designar instructor', fields: [F.ins()] },
+    run: v => { a.instructor = v.ins; return go(a, role, null, 'Instructor de seguimiento designado: ' + v.ins, [['is', 'Fue designado instructor de seguimiento de ' + a.nombre + '.']]); } });
+  return A;
+}
+const pendingFor = (a, role) => acts(a, role).some(x => !x.dis && x.kind !== 'ghost' && x.kind !== 'danger');
+
+/* ---------- formulario modal ---------- */
+function openForm(f) {
+  return new Promise(res => {
+    const dlg = $('#dlg');
+    dlg.innerHTML = '<form method="dialog" class="dlgf"><h3>' + esc(f.title) + '</h3>' + f.fields.map(x => {
+      const id = 'f_' + x.k; let inp;
+      if (x.type === 'select') inp = '<select id="' + id + '">' + x.opts.map(o => '<option' + (o === x.val ? ' selected' : '') + '>' + esc(o) + '</option>').join('') + '</select>';
+      else if (x.type === 'textarea') inp = '<textarea id="' + id + '" rows="3"' + (x.req ? ' required' : '') + '></textarea>';
+      else inp = '<input id="' + id + '" type="' + x.type + '" value="' + esc(x.val == null ? '' : x.val) + '"' + (x.req ? ' required' : '') + (x.type === 'number' ? ' min="1"' : '') + '>';
+      return '<label for="' + id + '">' + esc(x.label) + '</label>' + inp;
+    }).join('') + '<div class="dlgb"><button type="button" class="btn ghost" data-x="c">Cancelar</button><button type="submit" class="btn" value="ok">Confirmar</button></div></form>';
+    const form = $('form', dlg);
+    $('[data-x="c"]', dlg).onclick = () => { dlg.close(); res(null); };
+    form.onsubmit = e => { e.preventDefault(); const v = {}; f.fields.forEach(x => v[x.k] = $('#f_' + x.k, dlg).value.trim()); dlg.close(); res(v); };
+    dlg.oncancel = () => res(null);
+    dlg.showModal(); const first = $('input,select,textarea', dlg); if (first) first.focus();
+  });
+}
+let ACTS = [];
+async function runAct(i) {
+  const x = ACTS[i]; if (!x || x.dis) return;
+  let v = {};
+  if (x.form) { v = await openForm(x.form); if (!v) return; }
+  await x.run(v);
+}
+
+/* ---------- toast ---------- */
+let tT;
+function toast(m) { const t = $('#toast'); t.textContent = m; t.classList.add('on'); clearTimeout(tT); tT = setTimeout(() => t.classList.remove('on'), 3200); }
+
+/* ---------- piezas visuales ---------- */
+const chip = r => '<span class="chip" style="--rc:' + ROLES[r].c + '">' + esc(ROLES[r].n) + '</span>';
+function track(a, big) {
+  const st = ST[a.stage]; const s = sem(a, hoy());
+  return '<ol class="track' + (big ? ' big' : '') + '" aria-label="Avance: ' + esc(st.n) + '">' + STEPS.map((n, i) => {
+    let c = i < st.step ? 'done' : i === st.step ? 'cur ' + (st.bad ? 'red' : st.final ? 'fin' : s.k) : '';
+    if (i === st.step && st.detour) c += ' detour';
+    return '<li class="' + c + '"><span class="dot"></span>' + (big ? '<span class="lbl">' + n + '</span>' : '') + '</li>';
+  }).join('') + '</ol>';
+}
+function semBadge(a) {
+  const s = sem(a, hoy()); const st = ST[a.stage];
+  if (st.final) return '<span class="sem ' + (st.bad ? 'red' : 'fin') + '">' + esc(st.n) + '</span>';
+  if (s.k === 'none') return '<span class="sem none">' + diffDays(a.since, hoy()) + ' días en la etapa</span>';
+  return '<span class="sem ' + s.k + '">' + s.txt + (s.k === 'green' ? ' · vence ' + fmt(s.d) : '') + '</span>';
+}
+
+/* ---------- vistas ---------- */
+function viewPend() {
+  const role = S.role; const H = hoy();
+  const vis = apsArr().filter(visible);
+  const al = [];
+  vis.forEach(a => alerts(a, H).forEach(x => { if (x.to.includes(role)) al.push({ a, x }); }));
+  al.sort((p, q) => (p.x.k === 'red' ? 0 : 1) - (q.x.k === 'red' ? 0 : 1));
+  const todo = vis.filter(a => pendingFor(a, role));
+  const wait = vis.filter(a => !pendingFor(a, role) && !ST[a.stage].final);
+  let h = '<section class="col"><h2>Te corresponde actuar <span class="n">' + todo.length + '</span></h2>';
+  h += todo.length ? '<div class="list">' + todo.map(a => rowCard(a, true)).join('') + '</div>' : '<p class="empty">No tienes acciones pendientes. Cuando otro actor avance un proceso que te involucre, aparecerá aquí.</p>';
+  h += '</section><section class="col side"><h2>Alertas <span class="n">' + al.length + '</span></h2>';
+  h += al.length ? '<ul class="alerts">' + al.map(({ a, x }) => '<li class="' + x.k + '"><button class="lnk" data-open="' + a.id + '">' + esc(a.nombre) + '</button><span>' + esc(x.txt) + '</span></li>').join('') + '</ul>' : '<p class="empty">Sin alertas para tu rol.</p>';
+  if (wait.length && role !== 'ap') h += '<h2 class="mt">En manos de otros <span class="n">' + wait.length + '</span></h2><ul class="mini">' + wait.slice(0, 8).map(a => '<li><button class="lnk" data-open="' + a.id + '">' + esc(a.nombre) + '</button><span>' + ST[a.stage].resp.map(r => ROLES[r].n).join(', ') + '</span></li>').join('') + '</ul>';
+  return h + '</section>';
+}
+function rowCard(a, withAct) {
+  const st = ST[a.stage];
+  let act = '';
+  if (withAct) { const x = acts(a, S.role).find(y => !y.dis && y.kind !== 'ghost' && y.kind !== 'danger'); if (x) act = '<span class="next">' + esc(x.label) + '</span>'; }
+  return '<button class="row" data-open="' + a.id + '"><span class="who"><b>' + esc(a.nombre) + '</b><small>' + esc(a.programa) + '</small></span>' + track(a) +
+    '<span class="where"><b>' + esc(st.n) + '</b><small>' + (a.alt ? esc(a.alt) : 'Sin alternativa') + '</small></span>' + semBadge(a) + act + '</button>';
+}
+function viewAps() {
+  const q = S.q.toLowerCase();
+  const list = apsArr().filter(visible).filter(a => (!q || (a.nombre + a.doc + a.programa + a.empresa).toLowerCase().includes(q)) && (!S.fstage || String(ST[a.stage].step) === S.fstage));
+  return '<div class="filters"><input type="search" id="q" placeholder="Buscar por nombre, documento, programa o empresa" value="' + esc(S.q) + '"><select id="fs"><option value="">Todas las etapas</option>' + STEPS.map((n, i) => '<option value="' + i + '"' + (S.fstage === String(i) ? ' selected' : '') + '>' + n + '</option>').join('') + '</select></div>' +
+    (list.length ? '<div class="list">' + list.map(a => rowCard(a)).join('') + '</div>' : '<p class="empty">Ningún aprendiz coincide con el filtro.</p>');
+}
+function viewBoard() {
+  const H = hoy(); const all = apsArr(); const act = all.filter(a => !ST[a.stage].final);
+  const venc = act.filter(a => sem(a, H).k === 'red');
+  const des = act.filter(a => alerts(a, H).some(x => x.txt.includes('deserción')));
+  const cert = all.filter(a => a.stage === 'certificado');
+  const per = STEPS.map((n, i) => ({ n, c: all.filter(a => ST[a.stage].step === i).length, r: all.filter(a => ST[a.stage].step === i && sem(a, H).k === 'red').length }));
+  const max = Math.max(1, ...per.map(p => p.c));
+  const byRole = Object.keys(ROLES).map(r => {
+    const mine = act.filter(a => pendingFor(a, r));
+    return { r, c: mine.length, v: mine.filter(a => sem(a, H).k === 'red').length };
+  }).filter(x => x.c).sort((p, q) => q.v - p.v || q.c - p.c);
+  return '<div class="kpis"><div><b>' + act.length + '</b><span>en proceso</span></div><div class="red"><b>' + venc.length + '</b><span>con plazo vencido</span></div><div class="amber"><b>' + des.length + '</b><span>en riesgo de deserción</span></div><div class="ok"><b>' + cert.length + '</b><span>certificados</span></div></div>' +
+    '<div class="board"><section><h2>Dónde está cada aprendiz</h2><ul class="bars">' + per.map(p => '<li><span>' + p.n + '</span><span class="bar"><i style="width:' + (p.c / max * 100) + '%"></i>' + (p.r ? '<i class="r" style="width:' + (p.r / max * 100) + '%"></i>' : '') + '</span><b>' + p.c + '</b></li>').join('') + '</ul><p class="hint">La franja roja indica cuántos de esa etapa tienen el plazo vencido.</p></section>' +
+    '<section><h2>Quién tiene la pelota</h2>' + (byRole.length ? '<table class="tb"><thead><tr><th>Actor</th><th>Pendientes</th><th>Vencidos</th></tr></thead><tbody>' + byRole.map(x => '<tr><td>' + chip(x.r) + '</td><td>' + x.c + '</td><td class="' + (x.v ? 'tred' : '') + '">' + x.v + '</td></tr>').join('') + '</tbody></table>' : '<p class="empty">Nadie tiene acciones pendientes.</p>') +
+    '<h2 class="mt">Vencidos</h2>' + (venc.length ? '<ul class="mini">' + venc.map(a => '<li><button class="lnk" data-open="' + a.id + '">' + esc(a.nombre) + '</button><span>' + esc(ST[a.stage].n) + ', ' + sem(a, H).txt.toLowerCase() + '</span></li>').join('') + '</ul>' : '<p class="empty">Sin vencimientos.</p>') + '</section></div>';
+}
+function viewRuta() {
+  const main = ['lectiva', 'seleccion', 'revision_aval', 'revision_contrato', 'registro', 'arl', 'planeacion', 'ejecucion', 'evaluacion', 'juicio', 'certificacion'];
+  const det = ['mejora', 'comite', 'cambio', 'aplazado'];
+  const pz = st => { const p = st.plazo; if (!p) return 'Según reglamento'; if (p.t === 'hab') return p.d + ' días hábiles'; if (p.t === 'cal') return p.d + ' días calendario' + (p.base ? ' desde el inicio' : ''); if (p.t === 'custom') return 'Fijado por el instructor'; return { finLectiva: 'Fin de la lectiva', finGrupo: 'Fecha fin del grupo', inicioEP: '1 día antes del inicio', finEP: 'Fecha fin de la etapa' }[p.f]; };
+  const card = k => { const st = ST[k]; return '<li><div class="rh"><h3>' + esc(st.n) + '</h3><span class="pz">' + esc(pz(st)) + '</span></div><div class="rr">' + st.resp.map(chip).join('') + (st.doc ? '<span class="docx">' + esc(st.doc) + '</span>' : '') + '</div><p>' + esc(st.regla) + '</p></li>'; };
+  return '<p class="lead">Así avanza un aprendiz según la Guía GFPI-G-040 V02 y el Acuerdo 009 de 2024. Cada etapa notifica automáticamente a quien debe intervenir y vigila su plazo.</p><div class="ruta"><section><h2>Ruta principal</h2><ol class="steps">' + main.map(card).join('') + '</ol></section><section><h2>Desvíos posibles</h2><ul class="steps det">' + det.map(card).join('') + '</ul></section></div>';
+}
+function viewNotif() {
+  const ns = myNotifs();
+  setTimeout(() => markRead(ns.filter(n => !n.leida).map(n => n.id)), 1500);
+  return ns.length ? '<ul class="notifs">' + ns.map(n => '<li class="' + (n.leida ? '' : 'new') + '"><time>' + fmt(n.f) + '</time><div><button class="lnk" data-open="' + n.ap + '">' + esc(n.nom) + '</button><p>' + esc(n.msg) + '</p></div></li>').join('') + '</ul>' : '<p class="empty">No tienes notificaciones.</p>';
+}
+
+function drawer() {
+  const a = S.aps[S.open]; if (!a) return '';
+  const st = ST[a.stage]; const H = hoy(); const s = sem(a, H);
+  ACTS = acts(a, S.role);
+  const al = alerts(a, H);
+  const expected = a.inicioEP && a.finEP ? Math.max(1, Math.round(diffDays(a.inicioEP, a.finEP) / 30)) : 0;
+  const ck = (ok, t) => '<li class="' + (ok ? 'ok' : '') + '"><span class="cb" aria-hidden="true"></span>' + t + '</li>';
+  return '<div class="scrim" data-close></div><aside class="drawer" role="dialog" aria-label="Detalle de ' + esc(a.nombre) + '"><header><div><h2>' + esc(a.nombre) + '</h2><p>CC ' + esc(a.doc) + ', ficha ' + esc(a.ficha) + '<br>' + esc(a.programa) + '</p></div><button class="x" data-close aria-label="Cerrar">×</button></header>' +
+    track(a, true) +
+    '<section class="now"><div class="nh"><h3>' + esc(st.n) + (st.detour ? ' <em>desvío</em>' : '') + '</h3>' + semBadge(a) + '</div>' +
+    (st.final ? '' : '<p class="resp">Le corresponde a ' + st.resp.map(chip).join('') + (s.d ? '<span class="pz">Plazo: ' + fmt(s.d) + '</span>' : '') + '</p>') +
+    '<p class="regla">' + esc(st.regla) + '</p>' + (a.stage === 'comite' && a.comiteMotivo ? '<p class="regla"><b>Motivo:</b> ' + esc(a.comiteMotivo) + '</p>' : '') +
+    (al.length ? '<ul class="alerts in">' + al.map(x => '<li class="' + x.k + '"><span>' + esc(x.txt) + '</span></li>').join('') + '</ul>' : '') +
+    '<div class="acts">' + (ACTS.length ? ACTS.map((x, i) => '<button class="btn ' + (x.kind || '') + '" data-act="' + i + '"' + (x.dis ? ' disabled title="' + esc(x.why) + '"' : '') + '>' + esc(x.label) + '</button>' + (x.dis ? '<small class="why">' + esc(x.why) + '</small>' : x.note ? '<small class="why">' + esc(x.note) + '</small>' : '')).join('')
+      : (st.final ? '' : '<p class="wait">Como ' + esc(ROLES[S.role].n.toLowerCase()) + ' no tienes acciones en esta etapa. Se espera a: ' + st.resp.map(r => ROLES[r].n).join(', ') + '.</p>')) + '</div></section>' +
+    '<div class="grid"><section><h4>Alternativa</h4><dl><dt>Tipo</dt><dd>' + esc(a.alt || '—') + (a.cambios ? ' (' + a.cambios + ' de 3 cambios)' : '') + '</dd><dt>Escenario</dt><dd>' + esc(a.empresa || '—') + '</dd><dt>Instructor de seguimiento</dt><dd>' + esc(a.instructor || '—') + '</dd><dt>Etapa productiva</dt><dd>' + (a.inicioEP ? fmt(a.inicioEP) + ' a ' + fmt(a.finEP) : '—') + '</dd><dt>Fecha fin del grupo</dt><dd>' + fmt(a.finGrupo) + '</dd></dl></section>' +
+    '<section><h4>Documentos</h4><ul class="checks">' + ck(a.docs.f165, 'GFPI-F-165 selección') + ck(a.docs.arl, 'Afiliación ARL') + ck(a.docs.f023, 'GFPI-F-023 plan firmado') + ck(expected && a.bits.length >= expected && !pendingBit(a), 'GFPI-F-147 bitácoras (' + a.bits.length + (expected ? ' de ~' + expected : '') + ')') + ck(a.docs.constancia, 'Constancia de cumplimiento') + '</ul>' +
+    '<h4>Firmas del plan</h4><ul class="checks">' + ['ap', 'is', 'cf'].map(r => ck(a.firmas && a.firmas[r], ROLES[r].n)).join('') + '</ul></section>' +
+    '<section><h4>Bitácoras</h4>' + (a.bits.length ? '<ul class="bits">' + a.bits.map(b => '<li><b>' + b.n + '</b><span>Entregada ' + fmt(b.entregada) + '</span><span class="' + (b.retro ? 'ok' : (bdBetween(b.entregada, H) > 5 ? 'tred' : 'tam')) + '">' + (b.retro ? 'Retroalimentada ' + fmt(b.retro) : 'Sin retroalimentar') + '</span></li>').join('') + '</ul>' : '<p class="empty sm">Aún no hay bitácoras.</p>') + '</section>' +
+    '<section class="wide"><h4>Historial</h4><ol class="hist">' + a.hist.slice().reverse().map(x => '<li><time>' + fmt(x.f) + '</time>' + chip(x.r) + '<span>' + esc(x.t) + '</span></li>').join('') + '</ol></section></div></aside>';
+}
+
+/* ---------- render principal ---------- */
+const TABS = [['pend', 'Mis pendientes'], ['aps', 'Aprendices'], ['board', 'Tablero'], ['ruta', 'Ruta del proceso'], ['notif', 'Notificaciones']];
+function render() {
+  ensureIdent();
+  const app = $('#app');
+  if (S.mode === 'loading') { app.innerHTML = '<p class="empty pad">Conectando con los datos…</p>'; return; }
+  const tabs = TABS.filter(t => !(t[0] === 'board' && ['ap', 'cf'].includes(S.role)));
+  if (!tabs.some(t => t[0] === S.tab)) S.tab = 'pend';
+  const unread = myNotifs().filter(n => !n.leida).length;
+  const io = identOpts(S.role);
+  const empty = !Object.keys(S.aps).length;
+  let body;
+  if (empty && S.tab !== 'ruta') body = '<div class="empty big"><h2>No hay aprendices registrados todavía</h2><p>Carga un grupo de demostración para recorrer el proceso con cada rol.</p><button class="btn" data-demo>Cargar datos de demostración</button></div>';
+  else body = { pend: viewPend, aps: viewAps, board: viewBoard, ruta: viewRuta, notif: viewNotif }[S.tab]();
+  app.innerHTML =
+    '<header class="top"><div class="brand"><span class="mark" aria-hidden="true"></span><div><h1>Ruta de etapa productiva</h1><small>CAA Fonseca, Regional Guajira</small></div></div>' +
+    '<div class="who-ctl"><label>Ver como<select id="role">' + Object.entries(ROLES).map(([k, r]) => '<option value="' + k + '"' + (k === S.role ? ' selected' : '') + '>' + r.n + '</option>').join('') + '</select></label>' +
+    (io.length ? '<label>' + ({ ap: 'Aprendiz', cf: 'Empresa', is: 'Instructor' })[S.role] + '<select id="ident">' + io.map(([v, l]) => '<option value="' + esc(v) + '"' + (v === S.ident ? ' selected' : '') + '>' + esc(l) + '</option>').join('') + '</select></label>' : '') + '</div>' +
+    '<div class="date-ctl" title="Mueve la fecha para ver cómo se disparan plazos y alertas"><span>Fecha de simulación</span><b>' + fmt(hoy()) + '</b><div><button data-d="1">+1 día</button><button data-d="7">+7 días</button>' + (S.cfg.hoy ? '<button data-d="0">Hoy real</button>' : '') + '</div></div></header>' +
+    '<nav class="tabs" role="tablist">' + tabs.map(([k, l]) => '<button role="tab" aria-selected="' + (S.tab === k) + '" data-tab="' + k + '">' + l + (k === 'notif' && unread ? '<span class="badge">' + unread + '</span>' : '') + (k === 'pend' ? '<span class="cnt">' + apsArr().filter(visible).filter(a => pendingFor(a, S.role)).length + '</span>' : '') + '</button>').join('') + '</nav>' +
+    '<main class="main v-' + S.tab + '">' + body + '</main>' +
+    '<footer class="foot"><span>' + (S.mode === 'db' ? 'Datos compartidos: quien abra este enlace ve los mismos cambios.' : 'Datos guardados solo en este navegador.') + '</span><button class="lnk" data-demo>Restablecer demostración</button></footer>' +
+    drawer();
+  const q = $('#q'); if (q && document.activeElement !== q && S._qf) { q.focus(); q.setSelectionRange(q.value.length, q.value.length); }
+}
+
+document.addEventListener('click', async e => {
+  const t = e.target.closest('[data-tab],[data-open],[data-close],[data-act],[data-d],[data-demo]'); if (!t) return;
+  if (t.dataset.tab) { S.tab = t.dataset.tab; render(); }
+  else if (t.dataset.open) { S.open = t.dataset.open; render(); const d = $('.drawer'); if (d) d.focus && $('.x', d).focus(); }
+  else if (t.hasAttribute('data-close')) { S.open = null; render(); }
+  else if (t.dataset.act) { await runAct(+t.dataset.act); }
+  else if (t.dataset.d !== undefined) { const n = +t.dataset.d; S.cfg.hoy = n ? addDays(hoy(), n) : ''; await saveCfg(); render(); }
+  else if (t.hasAttribute('data-demo')) { if (Object.keys(S.aps).length && !confirm('Esto reemplaza todos los datos actuales por el grupo de demostración. ¿Continuar?')) return; await loadDemo(); }
+});
+document.addEventListener('change', e => {
+  if (e.target.id === 'role') { S.role = e.target.value; S.ident = ''; S.open = null; render(); }
+  if (e.target.id === 'ident') { S.ident = e.target.value; S.open = null; render(); }
+  if (e.target.id === 'fs') { S.fstage = e.target.value; render(); }
+});
+document.addEventListener('input', e => { if (e.target.id === 'q') { S.q = e.target.value; S._qf = true; render(); S._qf = false; } });
+document.addEventListener('keydown', e => { if (e.key === 'Escape' && S.open && !$('#dlg').open) { S.open = null; render(); } });
+
+initStore();
+
+</script>
+</body>
+</html>
