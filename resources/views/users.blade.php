@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,6 +10,7 @@
     <!-- FontAwesome Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
+
 <body class="bg-slate-100 font-sans text-slate-800">
 
     <div class="flex min-h-screen">
@@ -39,14 +41,14 @@
                         <i class="fa-solid fa-chalkboard-user w-6"></i>
                         <span>Instructores</span>
 
-                    <a href="#" class="flex items-center px-4 py-3 text-slate-400 hover:bg-slate-800 hover:text-white rounded-lg transition font-medium">
-                        <i class="fa-solid fa-file-invoice w-6"></i>
-                        <span>Reportes</span>
-                    </a>
-                    <a href="#" class="flex items-center px-4 py-3 text-slate-400 hover:bg-slate-800 hover:text-white rounded-lg transition font-medium">
-                        <i class="fa-solid fa-gear w-6"></i>
-                        <span>Configuración</span>
-                    </a>
+                        <a href="#" class="flex items-center px-4 py-3 text-slate-400 hover:bg-slate-800 hover:text-white rounded-lg transition font-medium">
+                            <i class="fa-solid fa-file-invoice w-6"></i>
+                            <span>Reportes</span>
+                        </a>
+                        <a href="#" class="flex items-center px-4 py-3 text-slate-400 hover:bg-slate-800 hover:text-white rounded-lg transition font-medium">
+                            <i class="fa-solid fa-gear w-6"></i>
+                            <span>Configuración</span>
+                        </a>
                 </nav>
             </div>
 
@@ -101,7 +103,7 @@
                     <div class="bg-white p-5 rounded-xl border border-slate-200 shadow-sm flex items-center justify-between">
                         <div>
                             <p class="text-xs uppercase font-semibold text-slate-500">En proceso</p>
-                            <h3 class="text-2xl font-bold mt-1 text-slate-800">0</h3> <!-- Esto se sacara de la base de datos -->                            
+                            <h3 class="text-2xl font-bold mt-1 text-slate-800">0</h3> <!-- Esto se sacara de la base de datos -->
                             <!--<span class="text-xs text-emerald-600 font-semibold"><i class="fa-solid fa-arrow-up"></i> +14.2%</span>-->
                         </div>
                         <div class="w-12 h-12 bg-emerald-100 text-emerald-600 rounded-lg flex items-center justify-center text-xl">
@@ -137,7 +139,7 @@
                     <div class="bg-white p-5 rounded-xl border border-slate-200 shadow-sm flex items-center justify-between">
                         <div>
                             <p class="text-xs uppercase font-semibold text-slate-500">Certificados</p>
-                            <h3 class="text-2xl font-bold mt-1 text-slate-800">0    </h3>
+                            <h3 class="text-2xl font-bold mt-1 text-slate-800">0 </h3>
                             <!--<span class="text-xs text-emerald-600 font-semibold"><i class="fa-solid fa-arrow-up"></i> +0.6%</span>-->
                         </div>
                         <div class="w-12 h-12 bg-indigo-100 text-indigo-600 rounded-lg flex items-center justify-center text-xl">
@@ -146,42 +148,71 @@
                     </div>
                 </div>
 
-                
 
-                    <!-- Tareas pendientes -->
-                    <div class="bg-white p-5 rounded-xl border border-slate-200 shadow-sm">
-                        <h2 class="font-semibold text-slate-700 mb-4">Tareas pendientes</h2>
-                        <ul class="space-y-4">
-                            <li class="flex items-start gap-3">
-                                <span class="w-2 h-2 rounded-full bg-emerald-500 mt-2"></span>
-                                <div>
-                                    <p class="text-sm font-medium text-slate-700">Andrés Felipe Romero Ariza</p>
-                                    <span class="text-xs text-slate-400">CC 1.006.871.330, ficha 2765432, Tecnología en Mecanización para la Agricultura Inteligente (722105)</span> <!-- llenar a los campos desde la base de datos -->
-                                    <a href="#" class="flex items-center text-sm bg-green-700 hover:bg-green-600 px-3 py-1.5 rounded-lg text-white transition-duration-1000"> <i class="fa-solid fa-eye mr-1"></i>Ver mas</a>
-                                </div>
-                            </li>
-                            <li class="flex items-start gap-3">
-                                <span class="w-2 h-2 rounded-full bg-blue-500 mt-2"></span>
-                                <div>
-                                    <p class="text-sm font-medium text-slate-700">Usuario registrado: Carlos M.</p>
-                                    <span class="text-xs text-slate-400">Hace 45 min</span>
-                                </div>
-                            </li>
-                            <li class="flex items-start gap-3">
-                                <span class="w-2 h-2 rounded-full bg-amber-500 mt-2"></span>
-                                <div>
-                                    <p class="text-sm font-medium text-slate-700">Factura #89 generada</p>
-                                    <span class="text-xs text-slate-400">Hace 2 horas</span>
-                                </div>
-                            </li>
-                        </ul>
-                    </div>
+
+                <!-- Tareas pendientes -->
+                <div class="bg-white p-5 rounded-xl border border-slate-200 shadow-sm">
+                    <h2 class="font-semibold text-slate-700 mb-4">Tareas pendientes</h2>
+                    <ul class="space-y-4">
+                        <li class="flex items-start gap-3">
+                            <span class="w-2 h-2 rounded-full bg-emerald-500 mt-2"></span>
+                            <div>
+                                <p class="text-sm font-medium text-slate-700">Andrés Felipe Romero Ariza</p>
+                                <span class="text-xs text-slate-400">CC 1.006.871.330, ficha 2765432, Tecnología en Mecanización para la Agricultura Inteligente (722105)</span> <!-- llenar a los campos desde la base de datos -->
+                                <a href="#" class="flex items-center text-sm bg-green-700 hover:bg-green-600 px-3 py-1.5 rounded-lg text-white transition-duration-1000"> <i class="fa-solid fa-eye mr-1"></i>Ver mas</a>
+                            </div>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <span class="w-2 h-2 rounded-full bg-blue-500 mt-2"></span>
+                            <div>
+                                <p class="text-sm font-medium text-slate-700">Usuario registrado: Carlos M.</p>
+                                <span class="text-xs text-slate-400">Hace 45 min</span>
+                            </div>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <span class="w-2 h-2 rounded-full bg-amber-500 mt-2"></span>
+                            <div>
+                                <p class="text-sm font-medium text-slate-700">Factura #89 generada</p>
+                                <span class="text-xs text-slate-400">Hace 2 horas</span>
+                            </div>
+                        </li>
+                    </ul>
                 </div>
-
-                <!-- Recent Records Table -->
-            </main>
         </div>
+
+        <!-- Recent Records Table -->
+        </main>
     </div>
-    
+    </div>
+
 </body>
+
+</html>
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <!-- Simplicity is the ultimate sophistication. - Leonardo da Vinci -->
+
+    <nav class="bg-white shadow mb-8">
+        <div class="max-w-7xl mx-auto px-4 py-4 flex justify-between items-center">
+            <h1 class="text-x1 font-bold text-gray 800">
+                dashboard
+            </h1>
+            <a href="/login" class="text-indigo-600 hover:underline">Salir</a>
+
+        </div>
+    </nav>
+    <main class="max-w-7x1 mx-auto px-4">
+        <div class="grid grid"></div>
+
+    </main>
+</body>
+
 </html>
