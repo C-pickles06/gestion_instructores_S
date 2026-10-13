@@ -18,7 +18,7 @@
                 <!-- Logo -->
                 <div class="h-16 flex items-center px-6 border-b border-slate-800">
                     <span class="text-xl font-bold tracking-wider text-indigo-400">
-                        <i class="fa-solid fa-cube mr-2"></i>Etapa productiva
+                        <i class="fa-solid fa-circle-nodes mr-2"></i>Etapa productiva
                     </span>
                     <span class="h-2 text-xs text-slate-500">CAA Fonseca, Regional Guajira</span>
                 </div>
@@ -31,12 +31,12 @@
                     </a>
                     </a>
                     <a href="#" class="flex items-center px-4 py-3 text-slate-400 hover:bg-slate-800 hover:text-white rounded-lg transition font-medium">
-                        <i class="fa-solid fa-cart-shopping w-6"></i>
+                        <i class="fa-solid fa-user-group w-6"></i>
                         <span>Aprendices</span>
                     </a>
 
                     <a href="#" class="flex items-center px-4 py-3 text-slate-400 hover:bg-slate-800 hover:text-white rounded-lg transition font-medium">
-                        <i class="fa-solid fa-file-invoice w-6"></i>
+                        <i class="fa-solid fa-chalkboard-user w-6"></i>
                         <span>Instructores</span>
 
                     <a href="#" class="flex items-center px-4 py-3 text-slate-400 hover:bg-slate-800 hover:text-white rounded-lg transition font-medium">
@@ -72,12 +72,15 @@
                     </button>
                     <h1 class="text-lg font-semibold text-slate-700">Dashboard General</h1>
                 </div>
+                <div class="w-full max-w-xs relative">
+                    <span class="h-4 block text-sm  font-medium text slate-700 mb-1.5">{{ $title ?? 'Coordinador'}}</span>
+                </div>
 
                 <div class="flex items-center gap-4">
                     <!-- Notifications -->
                     <button class="text-slate-500 hover:text-slate-700 relative p-2">
                         <i class="fa-regular fa-bell text-lg"></i>
-                        <span class="absolute top-1.5 right-1.5 w-2 h-2 bg-red-500 rounded-full"></span>
+                        <!--<span class="absolute top-1.5 right-1.5 w-2 h-2 bg-red-500 rounded-full"></span>-->
                     </button>
 
                     <!-- Logout Button -->
@@ -97,62 +100,64 @@
                     <!-- Card 1 -->
                     <div class="bg-white p-5 rounded-xl border border-slate-200 shadow-sm flex items-center justify-between">
                         <div>
-                            <p class="text-xs uppercase font-semibold text-slate-500">a</p>
-                            <h3 class="text-2xl font-bold mt-1 text-slate-800">0</h3> <!-- Esto se sacara de la base de datos -->                            <span class="text-xs text-emerald-600 font-semibold"><i class="fa-solid fa-arrow-up"></i> +14.2%</span>
+                            <p class="text-xs uppercase font-semibold text-slate-500">En proceso</p>
+                            <h3 class="text-2xl font-bold mt-1 text-slate-800">0</h3> <!-- Esto se sacara de la base de datos -->                            
+                            <!--<span class="text-xs text-emerald-600 font-semibold"><i class="fa-solid fa-arrow-up"></i> +14.2%</span>-->
                         </div>
                         <div class="w-12 h-12 bg-emerald-100 text-emerald-600 rounded-lg flex items-center justify-center text-xl">
-                            <i class="fa-solid fa-dollar-sign"></i>
+                            <i class="fa-solid fa-spinner fa-spin"></i>
                         </div>
                     </div>
 
                     <!-- Card 2 -->
                     <div class="bg-white p-5 rounded-xl border border-slate-200 shadow-sm flex items-center justify-between">
                         <div>
-                            <p class="text-xs uppercase font-semibold text-slate-500">Nuevos Usuarios</p>
-                            <h3 class="text-2xl font-bold mt-1 text-slate-800">1,240</h3>
-                            <span class="text-xs text-emerald-600 font-semibold"><i class="fa-solid fa-arrow-up"></i> +8.1%</span>
+                            <p class="text-xs uppercase font-semibold text-slate-500">Riesgo de deserción</p>
+                            <h3 class="text-2xl font-bold mt-1 text-slate-800">0</h3>
+                            <!--<span class="text-xs text-emerald-600 font-semibold"><i class="fa-solid fa-arrow-up"></i> +8.1%</span>-->
                         </div>
                         <div class="w-12 h-12 bg-blue-100 text-blue-600 rounded-lg flex items-center justify-center text-xl">
-                            <i class="fa-solid fa-user-plus"></i>
+                            <i class="fa-solid fa-triangle-exclamation"></i>
                         </div>
                     </div>
 
                     <!-- Card 3 -->
                     <div class="bg-white p-5 rounded-xl border border-slate-200 shadow-sm flex items-center justify-between">
                         <div>
-                            <p class="text-xs uppercase font-semibold text-slate-500">Pedidos Activos</p>
-                            <h3 class="text-2xl font-bold mt-1 text-slate-800">85</h3>
-                            <span class="text-xs text-rose-500 font-semibold"><i class="fa-solid fa-arrow-down"></i> -2.4%</span>
+                            <p class="text-xs uppercase font-semibold text-slate-500">Con plazo vencido</p>
+                            <h3 class="text-2xl font-bold mt-1 text-slate-800">0</h3>
+                            <!--<span class="text-xs text-rose-500 font-semibold"><i class="fa-solid fa-arrow-down"></i> -2.4%</span>-->
                         </div>
                         <div class="w-12 h-12 bg-amber-100 text-amber-600 rounded-lg flex items-center justify-center text-xl">
-                            <i class="fa-solid fa-box"></i>
+                            <i class="fa-solid fa-user-xmark"></i>
                         </div>
                     </div>
 
                     <!-- Card 4 -->
                     <div class="bg-white p-5 rounded-xl border border-slate-200 shadow-sm flex items-center justify-between">
                         <div>
-                            <p class="text-xs uppercase font-semibold text-slate-500">Conversión</p>
-                            <h3 class="text-2xl font-bold mt-1 text-slate-800">4.3%</h3>
-                            <span class="text-xs text-emerald-600 font-semibold"><i class="fa-solid fa-arrow-up"></i> +0.6%</span>
+                            <p class="text-xs uppercase font-semibold text-slate-500">Certificados</p>
+                            <h3 class="text-2xl font-bold mt-1 text-slate-800">0    </h3>
+                            <!--<span class="text-xs text-emerald-600 font-semibold"><i class="fa-solid fa-arrow-up"></i> +0.6%</span>-->
                         </div>
                         <div class="w-12 h-12 bg-indigo-100 text-indigo-600 rounded-lg flex items-center justify-center text-xl">
-                            <i class="fa-solid fa-chart-pie"></i>
+                            <i class="fa-solid fa-file-pen"></i>
                         </div>
                     </div>
                 </div>
 
                 
 
-                    <!-- Recent Activity -->
+                    <!-- Tareas pendientes -->
                     <div class="bg-white p-5 rounded-xl border border-slate-200 shadow-sm">
-                        <h2 class="font-semibold text-slate-700 mb-4">Últimas Acciones</h2>
+                        <h2 class="font-semibold text-slate-700 mb-4">Tareas pendientes</h2>
                         <ul class="space-y-4">
                             <li class="flex items-start gap-3">
                                 <span class="w-2 h-2 rounded-full bg-emerald-500 mt-2"></span>
                                 <div>
-                                    <p class="text-sm font-medium text-slate-700">Nueva orden #1042 registrada</p>
-                                    <span class="text-xs text-slate-400">Hace 12 min</span>
+                                    <p class="text-sm font-medium text-slate-700">Andrés Felipe Romero Ariza</p>
+                                    <span class="text-xs text-slate-400">CC 1.006.871.330, ficha 2765432, Tecnología en Mecanización para la Agricultura Inteligente (722105)</span> <!-- llenar a los campos desde la base de datos -->
+                                    <a href="#" class="flex items-center text-sm bg-green-700 hover:bg-green-600 px-3 py-1.5 rounded-lg text-white transition-duration-1000"> <i class="fa-solid fa-eye mr-1"></i>Ver mas</a>
                                 </div>
                             </li>
                             <li class="flex items-start gap-3">
